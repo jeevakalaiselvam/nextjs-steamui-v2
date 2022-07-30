@@ -15,3 +15,24 @@ export const FETCH_ALL_ACHIEVEMENTS_PLAYER = (gameID) =>
 export const HEADER_IMAGE = (gameId) => {
   return `https://cdn.cloudflare.steamstatic.com/steam/apps/${gameId}/header.jpg`;
 };
+
+export const getAPIUrlPrefix = () => {
+  let PREFIX_URL = "";
+  switch (process.env.NODE_ENV) {
+    case "development":
+      PREFIX_URL = "http://localhost:3000/api";
+      break;
+    case "production":
+      PREFIX_URL = "https://nextjs-steamtracker.vercel.app/api";
+      break;
+    default:
+      PREFIX_URL = "http://localhost:3000/api";
+      break;
+  }
+
+  return PREFIX_URL;
+};
+
+export const API_GET_GAMES = () => {
+  return `${getAPIUrlPrefix()}/games`;
+};

@@ -65,10 +65,7 @@ const Page = (props) => {
   return (
     <Container>
       {leftSidebar && <LeftSidebar>{leftSidebar}</LeftSidebar>}
-      <Main>
-        {header && <Header>{header}</Header>}
-        {content && <Content>{content}</Content>}
-      </Main>
+      <Main>{content && <Content>{content}</Content>}</Main>
       {rightSidebar && (
         <RightSidebar showRightSidebar={true}>{rightSidebar}</RightSidebar>
       )}

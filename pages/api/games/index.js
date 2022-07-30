@@ -7,12 +7,7 @@ export default function handler(req, res) {
     .then((response) => {
       const games = response.data.response.games;
 
-      const newGames = games.map((game) => {
-        const newGame = { ...game, data: "Jeeva" };
-        return newGame;
-      });
-
-      res.status(200).json({ status: "SUCCESS", games: newGames });
+      res.status(200).json({ status: "SUCCESS", data: games });
     })
     .catch((error) => {
       console.error(error);

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Profile from "../../atoms/Profile";
 import GamesMenu from "../menu/GamesMenu";
 
 const Container = styled.div`
@@ -10,8 +11,12 @@ const Container = styled.div`
 `;
 
 const GamesLeftSidebar = (props) => {
-  const { XPData } = props;
-  return <Container>GamesLeftSidebar</Container>;
+  return (
+    <Container>
+      <Profile />
+      <GamesMenu />
+    </Container>
+  );
 };
 
 export default GamesLeftSidebar;
