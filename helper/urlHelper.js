@@ -34,5 +34,9 @@ export const getAPIUrlPrefix = () => {
 };
 
 export const API_GET_GAMES = () => {
-  return `${getAPIUrlPrefix()}/games`;
+  return `/api/games`;
+};
+
+export const API_GET_GAME = (gameId) => {
+  return `/api/games/${gameId}`;
 };
