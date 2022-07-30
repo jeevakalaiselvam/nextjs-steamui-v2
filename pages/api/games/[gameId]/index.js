@@ -5,6 +5,7 @@ import {
 } from "../../../../helper/urlHelper";
 
 const axios = require("axios");
+const cheerio = require("cheerio");
 
 const handler = async (req, res) => {
   console.clear();
@@ -12,6 +13,32 @@ const handler = async (req, res) => {
     try {
       let game = {};
       const { gameId } = req.query;
+
+      let hiddenAchievements = [];
+      const url = `https://completionist.me/steam/app/${gameId}/achievements?display=mosaic&sort=created&order=desc`;
+
+      const hiddenResponse = await axios.get(url);
+      const html = hiddenResponse.data;
+      const $ = cheerio.load(html);
+      let titles = [];
+      let descriptions = [];
+
+      $("span.title").each(function (i, e) {
+        titles[i] = $(this).text().trim();
+      });
+
+      $("span.description").each(function (i, e) {
+        descriptions[i] = $(this).text().trim();
+      });
+
+      titles.forEach((title, i) => {
+        hiddenAchievements.push({
+          name: titles[i],
+          description: descriptions[i],
+        });
+      });
+
+      //Get All Hidden Achivements
 
       //Fetch Schema Achievements
       const achievementsResponse = await axios.get(
@@ -23,6 +50,7 @@ const handler = async (req, res) => {
         schemaAchievements:
           achievements.game.availableGameStats?.achievements || [],
         gameName: achievements.game.gameName,
+        hiddenAchievements: hiddenAchievements,
       };
 
       //Get Player Achievements

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { HEADER_IMAGE } from "../../helper/urlHelper";
 import { HiRefresh } from "react-icons/hi";
 import { fetchAllGames, fetchGame } from "../../helper/apiHelper";
+import { getFormattedGame } from "../../helper/utilHelper";
 
 const Container = styled.div`
   display: "flex";
@@ -44,17 +45,16 @@ const RefreshIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.5s;
+  transition: spin 0.5s;
   background-color: ${(props) =>
-    props.refreshing ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.85)"};
+    props.loading ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.85)"};
   -webkit-animation: ${(props) =>
-    props.refreshing ? "spin 1s linear infinite" : "none"};
+    props.loading ? "spin 1s linear infinite" : "none"};
   -moz-animation: ${(props) =>
-    props.refreshing ? "spin 1s linear infinite" : "none"};
-  animation: ${(props) =>
-    props.refreshing ? "spin 1s linear infinite" : "none"};
+    props.loading ? "spin 1s linear infinite" : "none"};
+  animation: ${(props) => (props.loading ? "spin 1s linear infinite" : "none")};
 
-  color: ${(props) => (props.refreshing ? "#fefefe" : "auto")};
+  color: ${(props) => (props.loading ? "#fefefe" : "auto")};
 
   &:hover {
     color: #fefefe;
@@ -92,8 +92,9 @@ export default function GameCard(props) {
     if (loading === true) {
       const getGame = async () => {
         const gameData = await fetchGame(appid);
-        console.log("GAME DATA".gameData);
-        setGame((old) => gameData);
+        const formattedGame = getFormattedGame(gameData);
+        console.log("FORMATTED GAME", formattedGame);
+        setGame((old) => formattedGame);
         setLoading((old) => false);
       };
       getGame();

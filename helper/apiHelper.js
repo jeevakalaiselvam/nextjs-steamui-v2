@@ -9,6 +9,6 @@ export const fetchAllGames = async (gameI) => {
 
 export const fetchGame = async (gameId) => {
   const response = await axios.get(API_GET_GAME(gameId));
-  const game = response.data;
+  const game = response.data.data;
   return game;
 };
