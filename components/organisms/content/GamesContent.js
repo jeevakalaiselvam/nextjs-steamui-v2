@@ -5,22 +5,46 @@ import * as Loaders from "react-spinners";
 import GameCard from "../../atoms/GameCard";
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
+  max-height: 100vh;
+`;
+
+const TopBarContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: scroll;
 `;
 
 const GamesContainer = styled.div`
   display: flex;
-  width: 100%;
+  flex: 1;
   align-items: center;
+  padding: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  overflow: scroll;
+`;
+
+const FilterContainer = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const SearchContainer = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 export default function GamesContent() {
@@ -30,6 +54,7 @@ export default function GamesContent() {
   useEffect(() => {
     const getGames = async () => {
       const gamesData = await fetchAllGames();
+      console.log("FETCH GAMES", gamesData);
       setGames((old) => gamesData);
       setLoading((old) => false);
     };
@@ -38,6 +63,10 @@ export default function GamesContent() {
 
   return (
     <Container>
+      <TopBarContainer>
+        <FilterContainer>Filter</FilterContainer>
+        <SearchContainer>Search</SearchContainer>
+      </TopBarContainer>
       <GamesContainer>
         {!loading &&
           games &&
