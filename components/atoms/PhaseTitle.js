@@ -6,12 +6,14 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 1rem;
 `;
 
 const TitleContainer = styled.div`
   display: ${(props) => (props.show ? "flex" : "none")};
   align-items: center;
   justify-content: center;
+  color: #fefefe;
 `;
 
 const InputContainer = styled.div`
@@ -21,7 +23,7 @@ const InputContainer = styled.div`
 
   & input {
     background-color: rgba(0, 0, 0, 0.5);
-    color: #61626d;
+    color: #fefefe;
     outline: none;
     border: none;
     text-align: center;

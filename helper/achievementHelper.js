@@ -109,17 +109,21 @@ export const formatAchievements = (
   }
 };
 
-export const getPhaseFilteredAchievements = (achievements, phase) => {
+export const getPhaseFilteredAchievements = (gameId, achievements, phase) => {
   let newAchievements = [];
-  newAchievements = achievements.filter((achievement) => {
-    if (typeof window !== "undefined") {
-      if (
-        JSON.parse(localStorage.getItem(`${achievement.name}_PHASE`)) ||
-        "PHASE1" == phase
-      ) {
-        return achievement;
+  if (achievements.length > 0) {
+    newAchievements = achievements.filter((achievement) => {
+      if (typeof window !== "undefined") {
+        if (
+          (JSON.parse(
+            localStorage.getItem(`${gameId}_${achievement.name}_PHASE`)
+          ) || "1") == phase
+        ) {
+          return achievement;
+        }
       }
-    }
-  });
+    });
+  }
+  console.log("For PHASE ", phase, " RETURNING ", newAchievements);
   return newAchievements;
 };

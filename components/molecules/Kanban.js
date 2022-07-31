@@ -12,6 +12,7 @@ const Container = styled.div`
   justify-content: flex-start;
   min-height: 95vh;
   max-height: 95vh;
+  width: 100%;
   overflow: hidden;
   flex-direction: column;
   margin-right: 0.25rem;
@@ -21,7 +22,7 @@ const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 1rem;
+  padding: 0rem 1rem 1rem 1rem;
   align-items: center;
   justify-content: center;
 `;
@@ -31,6 +32,7 @@ const AchievementContainer = styled.div`
   flex: 1;
   min-height: 95vh;
   max-height: 95vh;
+  width: 100%;
   overflow: scroll;
   align-items: center;
   justify-content: flex-start;
@@ -38,49 +40,67 @@ const AchievementContainer = styled.div`
   flex-direction: column;
 `;
 
-export default function Kanban({ title, achievements, phase }) {
+export default function Kanban({
+  title,
+  achievements,
+  phase,
+  refreshAchievementList,
+}) {
   const router = useRouter();
   const gameId = router.query.gameId;
 
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredAchievements, setFilteredAchievements] = useState(
     achievements || []
   );
-  const [searchFilteredAchievements, setSearchFilteredAchievements] = useState(
+  const [searchFilteredAchievement, setSearchFilteredAchievement] = useState(
     achievements || []
   );
-  const [searchTerm, setSearchTerm] = useState("");
 
-  const searchHandler = (searchTerm) => {
-    setSearchTerm((old) => searchTerm);
+  useEffect(() => {
+    setFilteredAchievements((old) => achievements.map((ach) => ach));
+  }, [achievements]);
+
+  const searchHandler = (searchData) => {
+    setSearchTerm((old) => searchData);
   };
 
   useEffect(() => {
     const newAchievements = filteredAchievements.filter((achievement) => {
-      return achievement.displayName
-        .toLowerCase()
-        .trim()
-        .includes(searchTerm.toLowerCase().trim());
+      console.log(achievement);
+      if (
+        achievement.displayName
+          .toLowerCase()
+          .trim()
+          .includes(searchTerm.toLowerCase().trim())
+      ) {
+        return true;
+      }
     });
-    setSearchFilteredAchievements((old) => newAchievements);
-    console.log("SEARCH FILTERED", newAchievements);
+    setSearchFilteredAchievement((old) => newAchievements);
   }, [searchTerm]);
-
-  const filterOptionChanged = (filterOption) => {
-    console.log("FILTER", filterOption);
-  };
 
   return (
     <Container>
       <TopContainer>
-        {/* <Search searchHandler={searchHandler} /> */}
         <PhaseTitle phase={phase} />
+        <Search searchHandler={searchHandler} opacity="0.75" />
       </TopContainer>
       <AchievementContainer>
-        {searchFilteredAchievements &&
-          searchFilteredAchievements.length &&
-          searchFilteredAchievements.map((achievement) => {
-            return <Achievement achievement={achievement} />;
+        {searchFilteredAchievement &&
+          searchFilteredAchievement.map((achievement) => {
+            return (
+              <Achievement
+                refreshAchievementList={refreshAchievementList}
+                achievement={achievement}
+                phase={phase}
+                gameId={gameId}
+              />
+            );
           })}
+        {searchFilteredAchievement && searchFilteredAchievement.length == 0 && (
+          <h5 style={{ color: "#fefefe" }}>None</h5>
+        )}
       </AchievementContainer>
     </Container>
   );

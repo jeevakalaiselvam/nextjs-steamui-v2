@@ -14,15 +14,43 @@ import {
 import { useRouter } from "next/router";
 import { formatAchievements } from "../../../helper/achievementHelper";
 import Planner from "../../molecules/Planner";
+import { HEADER_IMAGE } from "../../../helper/urlHelper";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+  position: relative;
+  z-index: 100;
   justify-content: flex-start;
   min-height: 100vh;
   max-height: 100vh;
+`;
+
+const OverlayImage = styled.div`
+  position: absolute;
+  background: url(${(props) => props.imageURL});
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: contain;
+  justify-content: center;
+  color: ${(props) => props.color};
+`;
+
+const InnerOverlayImage = styled.div`
+  width: 100%;
+  height: 100%;
+  background: url(${(props) => props.imageURL});
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(20px);
 `;
 
 const TopBarContainer = styled.div`
@@ -31,6 +59,8 @@ const TopBarContainer = styled.div`
   align-items: center;
   padding: 1rem;
   flex-wrap: wrap;
+  z-index: 100;
+  opacity: 0.5;
   min-height: 5vh;
   max-height: 5vh;
   justify-content: center;
@@ -47,21 +77,12 @@ const PlannerContainer = styled.div`
   display: ${(props) => (props.active ? "flex" : "none")};
   flex: 1;
   align-items: flex-start;
-  padding: 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
   min-height: 95vh;
+  width: 100%;
   max-height: 95vh;
   flex-wrap: wrap;
   overflow: hidden;
-  justify-content: center;
-`;
-
-const PlannerInnerContainer = styled.div`
-  display: "flex";
-  flex: 1;
-  align-items: flex-start;
-  width: 100%;
-  padding: 1rem;
-  flex-wrap: wrap;
   justify-content: center;
 `;
 
@@ -110,7 +131,10 @@ export default function GamesContent() {
   );
 
   return (
-    <Container>
+    <Container imageURL={HEADER_IMAGE(gameId)}>
+      <OverlayImage>
+        <InnerOverlayImage imageURL={HEADER_IMAGE(gameId)}></InnerOverlayImage>
+      </OverlayImage>
       <TopBarContainer>
         <ViewModeContainer>
           <Filter
@@ -123,7 +147,9 @@ export default function GamesContent() {
       </TopBarContainer>
       <PlannerContainer active={viewMode === GAME_VIEWMODE_PLANNER}>
         {loading && <Loaders.HashLoader />}
-        {!loading && <Planner achievements={formattedAchievements} />}
+        {!loading && (
+          <Planner achievements={formattedAchievements} gameId={gameId} />
+        )}
       </PlannerContainer>
       <JournalContainer active={viewMode === GAME_VIEWMODE_JOURNAL}>
         {loading && <Loaders.HashLoader />}

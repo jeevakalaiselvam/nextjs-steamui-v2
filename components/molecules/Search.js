@@ -5,7 +5,9 @@ import { HiSearch } from "react-icons/hi";
 const Container = styled.div`
   display: flex;
   align-items: center;
+  z-index: 100;
   justify-content: center;
+  opacity: ${(props) => props.opacity || 1};
 `;
 
 const IconContainer = styled.div`
@@ -37,7 +39,7 @@ const InputContainer = styled.div`
   }
 `;
 
-export default function Search({ searchHandler }) {
+export default function Search({ searchHandler, opacity }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function Search({ searchHandler }) {
   };
 
   return (
-    <Container>
+    <Container opacity={opacity}>
       <IconContainer>
         <HiSearch />
       </IconContainer>

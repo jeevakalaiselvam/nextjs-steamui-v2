@@ -8,6 +8,7 @@ const Container = styled.div`
   padding: 0.5rem;
   color: #fefefe;
   justify-content: "center";
+  z-index: 100;
   margin: 0.25rem;
 
   & select {
