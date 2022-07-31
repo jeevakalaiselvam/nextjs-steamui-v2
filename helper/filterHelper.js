@@ -51,14 +51,14 @@ export const GAME_VIEWMODE_OPTION = [
 export const getGamesFiltered = (games, filterOption) => {
   if (filterOption === GAMES_SORT_COMPLETION_DESC) {
     const newGames = games.sort((game1, game2) => {
-      return +game1.percentage < +game2.percentage;
+      return +game1.percentage > +game2.percentage;
     });
     return newGames;
   }
 
   if (filterOption === GAMES_SORT_COMPLETION_ASC) {
     const newGames = games.sort((game1, game2) => {
-      return +game1.percentage > +game2.percentage;
+      return +game1.percentage < +game2.percentage;
     });
     return newGames;
   }
@@ -76,14 +76,14 @@ export const getGamesFiltered = (games, filterOption) => {
 
   if (filterOption === GAMES_SORT_NAME_ASC) {
     const newGames = games.sort((game1, game2) => {
-      return game1.gameName > game2.gameName;
+      return game1.gameName < game2.gameName;
     });
     return newGames;
   }
 
   if (filterOption === GAMES_SORT_NAME_DESC) {
     const newGames = games.sort((game1, game2) => {
-      return game1.gameName < game2.gameName;
+      return game1.gameName > game2.gameName;
     });
     return newGames;
   }

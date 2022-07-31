@@ -33,6 +33,7 @@ const OverlayImage = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  border-radius: 4px;
   align-items: center;
   overflow: hidden;
   background-repeat: no-repeat;
@@ -53,12 +54,12 @@ const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.2);
   top: 0px;
   left: 0px;
-  border-radius: 4px;
   width: 100%;
   z-index: 20;
   height: 100%;
   overflow: hidden;
   display: flex;
+  border-radius: 4px;
   align-items: center;
   justify-content: center;
   font-size: 4rem;

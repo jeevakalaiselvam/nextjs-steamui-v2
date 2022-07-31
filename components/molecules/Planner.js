@@ -26,21 +26,20 @@ const KanbanContainer = styled.div`
 `;
 
 export default function Planner({ achievements, gameId, gameName }) {
+  console.log("ACHIEVEMENTS PLANNER", achievements);
   const [allAchievements, setAllAchievements] = useState([]);
   const refreshAchievementList = () => {
     setAllAchievements((old) => achievements.map((ach) => ach));
   };
 
   useEffect(() => {
-    setAllAchievements((old) =>
-      achievements
-        .filter((achievement) => achievement.achieved != 1)
-        .sort(
-          (achievement1, achievement2) =>
-            +achievement1.percentage > +achievement2.percentage
-        )
-    );
+    console.log("SETTING ALL ACHIEVEMENTS");
+    setAllAchievements((old) => achievements);
   }, [achievements]);
+
+  useEffect(() => {
+    setAllAchievements((old) => achievements);
+  }, []);
 
   return (
     <Container>

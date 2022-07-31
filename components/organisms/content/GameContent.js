@@ -30,7 +30,7 @@ const Container = styled.div`
 
 const OverlayImage = styled.div`
   position: absolute;
-  background: url(${(props) => props.imageURL});
+  background: rgba(0, 0, 0, 0.5);
   top: 0px;
   left: 0px;
   width: 100%;

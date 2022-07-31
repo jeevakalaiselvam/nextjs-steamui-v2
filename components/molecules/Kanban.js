@@ -47,6 +47,7 @@ export default function Kanban({
   refreshAchievementList,
   gameName,
 }) {
+  console.log("KANBAN ACHIEVEMENTS ", phase, achievements);
   const router = useRouter();
   const gameId = router.query.gameId;
 
@@ -65,6 +66,11 @@ export default function Kanban({
     setNewAchievements((old) => achievements);
     setSearchTerm((old) => "");
   }, [achievements]);
+
+  useEffect(() => {
+    setNewAchievements((old) => achievements);
+    setSearchAchievements((old) => achievements);
+  }, []);
 
   useEffect(() => {
     const newInnerAchievements = newAchievements.filter((achievement) =>

@@ -5,7 +5,11 @@ import * as Loaders from "react-spinners";
 import GameCard from "../../atoms/GameCard";
 import Search from "../../molecules/Search";
 import Filter from "../../molecules/Filter";
-import { GAMES_FILTER_OPTIONS } from "../../../helper/filterHelper";
+import {
+  GAMES_FILTER_OPTIONS,
+  GAMES_SORT_COMPLETION_DESC,
+  getGamesFiltered,
+} from "../../../helper/filterHelper";
 
 const Container = styled.div`
   display: flex;
@@ -58,8 +62,14 @@ export default function GamesContent() {
   useEffect(() => {
     const getGames = async () => {
       const gamesData = await fetchAllGames();
-      setGames((old) => gamesData);
-      setSearchFilteredGames((old) => gamesData);
+      console.log("GAMES DATA", gamesData);
+      const completionSortedGames = gamesData.sort(
+        (game1, game2) =>
+          +Math.ceil((game1.remaining / game1.total) * 100) >
+          +Math.ceil((game2.remaining / game2.total) * 100)
+      );
+      setGames((old) => completionSortedGames);
+      setSearchFilteredGames((old) => completionSortedGames);
       setLoading((old) => false);
     };
     getGames();
@@ -79,17 +89,9 @@ export default function GamesContent() {
     setSearchFilteredGames((old) => newFilteredGames);
   }, [searchTerm]);
 
-  const filterOptionChanged = (filterOption) => {};
-
   return (
     <Container>
       <TopBarContainer>
-        <FilterContainer>
-          <Filter
-            filterOptions={GAMES_FILTER_OPTIONS}
-            filterOptionChanged={filterOptionChanged}
-          />
-        </FilterContainer>
         <SearchContainer>
           <Search searchHandler={searchHandler} />
         </SearchContainer>
