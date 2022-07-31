@@ -21,7 +21,6 @@ const TopBarContainer = styled.div`
   padding: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  overflow: scroll;
 `;
 
 const GamesContainer = styled.div`

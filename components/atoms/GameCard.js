@@ -81,7 +81,7 @@ const ToGetIcon = styled.div`
   display: flex;
   align-items: center;
   color: #f1b51b;
-  font-size: ${(props) => props.iconSize || "1.25rem"};
+  font-size: ${(props) => props.iconSize || "2rem"};
   justify-content: center;
 `;
 
@@ -90,7 +90,7 @@ const ToGetData = styled.div`
   align-items: center;
   justify-content: center;
   color: #f1b51b;
-  font-size: ${(props) => props.textSize || "1rem"};
+  font-size: ${(props) => props.textSize || "1.5rem"};
 `;
 
 const RefreshIconContainer = styled.div`
@@ -107,7 +107,7 @@ const RefreshIconContainer = styled.div`
 `;
 
 const RefreshIcon = styled.div`
-  font-size: 1.25rem;
+  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
