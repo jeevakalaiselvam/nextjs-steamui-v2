@@ -54,7 +54,6 @@ export default function Kanban({
 
   const [newAchievements, setNewAchievements] = useState([]);
   const resetIconTitles = () => {
-    console.log("CHANGING TITLES");
     setNewAchievements((old) => [...old]);
   };
 

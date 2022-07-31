@@ -17,7 +17,6 @@ export const calculateXPFromPercentage = (percentage) => {
 };
 
 export const getAllXPFromAchievements = (achievements) => {
-  console.log("ACHIEVEMENTS", achievements);
   let xpData = { totalXP: 0, completedXP: 0, remainingXP: 0 };
   const { totalXP, completedXP, remainingXP } = xpData;
   achievements.forEach((achievement) => {
@@ -40,13 +39,6 @@ export const formatAchievements = (
   playerAchievements,
   hiddenAchievements
 ) => {
-  console.log("ALL TYPE ACHIEVEMENTS", {
-    schemaAchievements,
-    globalAchievements,
-    playerAchievements,
-    hiddenAchievements,
-  });
-
   if (
     schemaAchievements &&
     schemaAchievements.length > 0 &&
@@ -110,7 +102,6 @@ export const formatAchievements = (
 };
 
 export const getPhaseFilteredAchievements = (gameId, achievements, phase) => {
-  console.log("GOT For PHASE ", phase, " DATA ", achievements);
   let newAchievements = [];
   if (achievements.length > 0) {
     newAchievements = achievements.filter((achievement) => {
@@ -125,6 +116,5 @@ export const getPhaseFilteredAchievements = (gameId, achievements, phase) => {
       }
     });
   }
-  console.log("For PHASE ", phase, " RETURNING ", newAchievements);
   return newAchievements;
 };

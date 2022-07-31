@@ -26,10 +26,8 @@ const KanbanContainer = styled.div`
 `;
 
 export default function Planner({ achievements, gameId, gameName }) {
-  console.log("PLANNER ACHIEVEMENTS", achievements);
   const [allAchievements, setAllAchievements] = useState([]);
   const refreshAchievementList = () => {
-    console.log("REFRESHING ACHIEVEMENTS");
     setAllAchievements((old) => achievements.map((ach) => ach));
   };
 

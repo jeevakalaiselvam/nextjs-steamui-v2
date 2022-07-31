@@ -133,7 +133,6 @@ export default function GamesContent() {
   useEffect(() => {
     const getGame = async () => {
       const gamesData = await fetchGame(gameId);
-      console.log("FETCH GAME", gamesData);
       setGame((old) => gamesData);
       setLoading((old) => false);
     };
@@ -159,7 +158,6 @@ export default function GamesContent() {
       playerAchievements,
       hiddenAchievements
     );
-    console.log("FORMATTED ACHIEVEMENTS", formattedInnerAchievements);
     setFormattedAchievements((old) => formattedInnerAchievements);
   }, [game]);
 
@@ -170,7 +168,6 @@ export default function GamesContent() {
       playerAchievements,
       hiddenAchievements
     );
-    console.log("FORMATTED ACHIEVEMENTS", formattedInnerAchievements);
     setFormattedAchievements((old) => formattedInnerAchievements);
   }, []);
 

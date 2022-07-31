@@ -58,7 +58,6 @@ export default function GamesContent() {
   useEffect(() => {
     const getGames = async () => {
       const gamesData = await fetchAllGames();
-      console.log("FETCH GAMES", gamesData);
       setGames((old) => gamesData);
       setSearchFilteredGames((old) => gamesData);
       setLoading((old) => false);
@@ -80,9 +79,7 @@ export default function GamesContent() {
     setSearchFilteredGames((old) => newFilteredGames);
   }, [searchTerm]);
 
-  const filterOptionChanged = (filterOption) => {
-    console.log("FILTER", filterOption);
-  };
+  const filterOptionChanged = (filterOption) => {};
 
   return (
     <Container>
