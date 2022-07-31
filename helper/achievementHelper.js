@@ -118,3 +118,13 @@ export const getPhaseFilteredAchievements = (gameId, achievements, phase) => {
   }
   return newAchievements;
 };
+
+export const getRecentlyUnlocked = (achievements) => {
+  let unlockedAchievements = achievements.filter(
+    (achievement) => achievement.achieved == 1
+  );
+  let recentUnlocked = unlockedAchievements.sort(
+    (ach1, ach2) => +ach1.unlocktime < +ach2.unlocktime
+  );
+  return recentUnlocked;
+};

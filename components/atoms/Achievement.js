@@ -99,10 +99,9 @@ const DataContainer = styled.div`
 
 const TitleContainer = styled.div`
   display: flex;
-  flex: 1;
   color: #eeeeee;
   z-index: 100;
-  padding: 0 8px 8px 8px;
+  padding: 0 8px 2px 8px;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -115,9 +114,8 @@ const DescriptionContainer = styled.div`
   display: flex;
   flex: 1;
   width: 100%;
-  padding: 0 8px 8px 8px;
-  color: #e0e0e0;
-  font-weight: 400;
+  padding: 0 2px 8px 8px;
+  color: #b0bec5dd;
   z-index: 100;
   align-items: center;
   justify-content: center;
@@ -125,7 +123,7 @@ const DescriptionContainer = styled.div`
 
 const PhaseContainer = styled.div`
   display: flex;
-  width: 70%;
+  width: 80%;
   align-items: center;
   flex-direction: column;
   justify-content: center;

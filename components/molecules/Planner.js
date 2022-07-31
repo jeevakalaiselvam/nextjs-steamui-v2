@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getPhaseFilteredAchievements } from "../../helper/achievementHelper";
+import {
+  getPhaseFilteredAchievements,
+  getRecentlyUnlocked,
+} from "../../helper/achievementHelper";
 import Kanban from "./Kanban";
 
 const Container = styled.div`
@@ -108,6 +111,16 @@ export default function Planner({ achievements, gameId, gameName }) {
           )}
           refreshAchievementList={refreshAchievementList}
           title={"PHASE5"}
+          phase={5}
+          gameId={gameId}
+          gameName={gameName}
+        />
+      </KanbanContainer>
+      <KanbanContainer>
+        <Kanban
+          achievements={getRecentlyUnlocked(allAchievements)}
+          refreshAchievementList={refreshAchievementList}
+          title={"PHASE6"}
           phase={5}
           gameId={gameId}
           gameName={gameName}

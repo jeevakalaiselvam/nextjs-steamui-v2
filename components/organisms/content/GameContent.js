@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { formatAchievements } from "../../../helper/achievementHelper";
 import Planner from "../../molecules/Planner";
 import { HEADER_IMAGE } from "../../../helper/urlHelper";
+import { HiRefresh } from "react-icons/hi";
 
 const Container = styled.div`
   display: flex;
@@ -91,6 +92,21 @@ const ResetButton = styled.div`
   display: flex;
   padding: 0 1rem 0 1rem;
   align-items: center;
+  justify-content: center;
+  background-color: #3049d1;
+  color: #fefefe;
+  cursor: pointer;
+  &:hover {
+    background-color: #1e33a6;
+  }
+`;
+
+const SyncButton = styled.div`
+  display: flex;
+  padding: 0 1rem 0 1rem;
+  align-items: center;
+  height: 20px;
+  margin-right: 1rem;
   justify-content: center;
   background-color: #3049d1;
   color: #fefefe;
@@ -180,6 +196,10 @@ export default function GamesContent() {
     });
   };
 
+  const syncAchievements = () => {
+    setLoading((old) => true);
+  };
+
   return (
     <Container imageURL={HEADER_IMAGE(gameId)}>
       <OverlayImage>
@@ -196,6 +216,9 @@ export default function GamesContent() {
             />
           </FilterContainer>
           <ResetContainer>
+            <SyncButton onClick={syncAchievements}>
+              <HiRefresh />
+            </SyncButton>
             <ResetButton onClick={resetKanbanBoard}>RESET BOARD</ResetButton>
           </ResetContainer>
         </ViewModeContainer>
