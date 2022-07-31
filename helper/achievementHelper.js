@@ -107,7 +107,7 @@ export const getPhaseFilteredAchievements = (gameId, achievements, phase) => {
     newAchievements = achievements.filter(
       (achievement) => achievement.achieved == 0
     );
-    newAchievements = achievements.filter((achievement) => {
+    newAchievements = newAchievements.filter((achievement) => {
       if (typeof window !== "undefined") {
         if (
           (JSON.parse(
