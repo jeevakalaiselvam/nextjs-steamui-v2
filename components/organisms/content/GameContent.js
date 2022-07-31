@@ -163,6 +163,17 @@ export default function GamesContent() {
     setFormattedAchievements((old) => formattedInnerAchievements);
   }, [game]);
 
+  useEffect(() => {
+    const formattedInnerAchievements = formatAchievements(
+      schemaAchievements,
+      globalAchievements,
+      playerAchievements,
+      hiddenAchievements
+    );
+    console.log("FORMATTED ACHIEVEMENTS", formattedInnerAchievements);
+    setFormattedAchievements((old) => formattedInnerAchievements);
+  }, []);
+
   const resetKanbanBoard = () => {
     formattedAcheievements.forEach((achievement) => {
       if (typeof window !== "undefined") {

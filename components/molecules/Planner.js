@@ -35,7 +35,7 @@ export default function Planner({ achievements, gameId }) {
 
   useEffect(() => {
     setAllAchievements((old) => achievements);
-  }, []);
+  }, [achievements]);
 
   return (
     <Container>
