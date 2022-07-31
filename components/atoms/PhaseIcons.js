@@ -47,27 +47,31 @@ export default function PhaseIcons({
   let phase5Title = "";
 
   if (typeof window !== "undefined") {
-    phase1Title =
-      localStorage.getItem(`PHASE_1_TITLE`).toUpperCase() ||
-      `PHASE 1`.toUpperCase();
-    phase2Title =
-      localStorage.getItem(`PHASE_2_TITLE`).toUpperCase() ||
-      `PHASE 2`.toUpperCase();
-    phase3Title =
-      localStorage.getItem(`PHASE_3_TITLE`).toUpperCase() ||
-      `PHASE 3`.toUpperCase();
-    phase4Title =
-      localStorage.getItem(`PHASE_4_TITLE`).toUpperCase() ||
-      `PHASE 4`.toUpperCase();
-    phase5Title =
-      localStorage.getItem(`PHASE_5_TITLE`).toUpperCase() ||
-      `PHASE 5`.toUpperCase();
+    phase1Title = (
+      localStorage.getItem(`PHASE_1_TITLE`) || `PHASE 1`
+    ).toUpperCase();
+    phase2Title = (
+      localStorage.getItem(`PHASE_2_TITLE`) || `PHASE 2`
+    ).toUpperCase();
+    phase3Title = (
+      localStorage.getItem(`PHASE_3_TITLE`) || `PHASE 3`
+    ).toUpperCase();
+    phase4Title = (
+      localStorage.getItem(`PHASE_4_TITLE`) || `PHASE 4`
+    ).toUpperCase();
+    phase5Title = (
+      localStorage.getItem(`PHASE_5_TITLE`) || `PHASE 5`
+    ).toUpperCase();
   }
 
   return (
     <Container>
       <Button
-        active={active === 1}
+        active={
+          (
+            localStorage.getItem(`${gameId}_${apiname}_PHASE`) || `1`
+          ).toUpperCase() == "1"
+        }
         onClick={() => {
           changePhase(1);
         }}
@@ -75,7 +79,11 @@ export default function PhaseIcons({
         {phase1Title}
       </Button>
       <Button
-        active={active === 2}
+        active={
+          (
+            localStorage.getItem(`${gameId}_${apiname}_PHASE`) || `1`
+          ).toUpperCase() == "2"
+        }
         onClick={() => {
           changePhase(2);
         }}
@@ -83,7 +91,11 @@ export default function PhaseIcons({
         {phase2Title}
       </Button>
       <Button
-        active={active === 3}
+        active={
+          (
+            localStorage.getItem(`${gameId}_${apiname}_PHASE`) || `1`
+          ).toUpperCase() == "3"
+        }
         onClick={() => {
           changePhase(3);
         }}
@@ -91,7 +103,11 @@ export default function PhaseIcons({
         {phase3Title}
       </Button>
       <Button
-        active={active === 4}
+        active={
+          (
+            localStorage.getItem(`${gameId}_${apiname}_PHASE`) || `1`
+          ).toUpperCase() == "4"
+        }
         onClick={() => {
           changePhase(4);
         }}
@@ -99,7 +115,11 @@ export default function PhaseIcons({
         {phase4Title}
       </Button>
       <Button
-        active={active === 5}
+        active={
+          (
+            localStorage.getItem(`${gameId}_${apiname}_PHASE`) || `1`
+          ).toUpperCase() == "5"
+        }
         onClick={() => {
           changePhase(5);
         }}

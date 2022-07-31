@@ -37,9 +37,9 @@ export default function PhaseTitle(props) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const titleInStorage =
-        localStorage.getItem(`PHASE_${phase}_TITLE`).toUpperCase() ||
-        `PHASE ${phase}`.toUpperCase();
+      const titleInStorage = (
+        localStorage.getItem(`PHASE_${phase}_TITLE`) || `PHASE ${phase}`
+      ).toUpperCase();
 
       setTitle((old) => titleInStorage.toUpperCase());
     }
