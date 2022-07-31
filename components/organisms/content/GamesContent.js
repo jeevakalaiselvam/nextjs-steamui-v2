@@ -4,6 +4,8 @@ import { fetchAllGames } from "../../../helper/apiHelper";
 import * as Loaders from "react-spinners";
 import GameCard from "../../atoms/GameCard";
 import Search from "../../molecules/Search";
+import Filter from "../../molecules/Filter";
+import { GAMES_FILTER_OPTIONS } from "../../../helper/filterHelper";
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +28,7 @@ const TopBarContainer = styled.div`
 const GamesContainer = styled.div`
   display: flex;
   flex: 1;
-  align-items: center;
+  align-items: flex-start;
   padding: 1rem;
   flex-wrap: wrap;
   justify-content: center;
@@ -49,7 +51,7 @@ const SearchContainer = styled.div`
 
 export default function GamesContent() {
   const [games, setGames] = useState([]);
-  const [filteredGames, setFilteredGames] = useState([]);
+  const [searchFilteredGames, setSearchFilteredGames] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -58,7 +60,7 @@ export default function GamesContent() {
       const gamesData = await fetchAllGames();
       console.log("FETCH GAMES", gamesData);
       setGames((old) => gamesData);
-      setFilteredGames((old) => gamesData);
+      setSearchFilteredGames((old) => gamesData);
       setLoading((old) => false);
     };
     getGames();
@@ -72,22 +74,31 @@ export default function GamesContent() {
     const newFilteredGames = games.filter((game) => {
       return game.gameName.toLowerCase().trim().includes(searchTerm);
     });
-    setFilteredGames((old) => newFilteredGames);
+    setSearchFilteredGames((old) => newFilteredGames);
   }, [searchTerm]);
+
+  const filterOptionChanged = (filterOption) => {
+    console.log("FILTER", filterOption);
+  };
 
   return (
     <Container>
       <TopBarContainer>
-        <FilterContainer>Filter</FilterContainer>
+        <FilterContainer>
+          <Filter
+            filterOptions={GAMES_FILTER_OPTIONS}
+            filterOptionChanged={filterOptionChanged}
+          />
+        </FilterContainer>
         <SearchContainer>
           <Search searchHandler={searchHandler} />
         </SearchContainer>
       </TopBarContainer>
       <GamesContainer>
         {!loading &&
-          filteredGames &&
-          filteredGames.length > 0 &&
-          filteredGames.map((game) => {
+          searchFilteredGames &&
+          searchFilteredGames.length > 0 &&
+          searchFilteredGames.map((game) => {
             return <GameCard game={game} id={game.appid} />;
           })}
         {loading && <Loaders.HashLoader />}

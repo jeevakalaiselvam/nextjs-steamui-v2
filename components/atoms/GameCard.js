@@ -143,7 +143,9 @@ const RefreshIcon = styled.div`
 `;
 
 export default function GameCard(props) {
-  const { appid, gameName, playerAchievements } = props.game;
+  const { appid, gameName, playerAchievements, total, completed, remaining } =
+    props.game;
+  console.log("GAME", props.game);
   const [showIcons, setShowIcons] = useState(true);
   const [loading, setLoading] = useState(false);
   const [game, setGame] = useState({});
@@ -151,11 +153,6 @@ export default function GameCard(props) {
   const startLoading = () => {
     setLoading((old) => true);
   };
-
-  const completed =
-    playerAchievements?.reduce((acc, acheievement, index) => {
-      return acc + acheievement.achieved == 1 ? 1 : 0;
-    }, 0) || 0;
 
   useEffect(() => {
     if (loading === true) {
@@ -182,7 +179,7 @@ export default function GameCard(props) {
           <FaTrophy />
         </ToGetIcon>
         <ToGetData visible={playerAchievements?.length || false}>
-          {playerAchievements?.length || 0 - completed}
+          {remaining}
         </ToGetData>
       </ToGetContainer>
       <RefreshIconContainer>
