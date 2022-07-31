@@ -64,6 +64,7 @@ export default function Kanban({
 
   useEffect(() => {
     setNewAchievements((old) => achievements);
+    setSearchAchievements((old) => achievements);
     setSearchTerm((old) => "");
   }, [achievements]);
 

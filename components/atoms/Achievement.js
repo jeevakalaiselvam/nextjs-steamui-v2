@@ -151,7 +151,7 @@ const PercentageIcon = styled.div`
   flex-direction: column;
   z-index: 100;
   font-size: 2rem;
-  color: #737c9d;
+  color: #f5f5f5;
   justify-content: center;
 `;
 
@@ -161,7 +161,7 @@ const PercentageData = styled.div`
   flex-direction: column;
   z-index: 100;
   font-size: 1.2rem;
-  color: #737c9d;
+  color: #f5f5f5;
   justify-content: center;
 `;
 

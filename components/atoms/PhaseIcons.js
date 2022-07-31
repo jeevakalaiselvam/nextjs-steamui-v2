@@ -10,7 +10,8 @@ const Container = styled.div`
 
 const Button = styled.div`
   display: flex;
-  background-color: #3049d1;
+  background-color: ${(props) =>
+    props.active ? "#3049d1" : "rgba(0, 0, 0, 0.5)"};
   color: #fefefe;
   cursor: pointer;
   z-index: 100;
@@ -18,7 +19,6 @@ const Button = styled.div`
   padding: 0.25rem;
   align-items: center;
   justify-content: center;
-  opacity: ${(props) => (props.active ? "1" : "0.25")};
 
   &:hover {
     background: #1e33a6;
