@@ -29,8 +29,7 @@ export default function Planner({ achievements, gameId }) {
   const [allAchievements, setAllAchievements] = useState(achievements);
   const refreshAchievementList = () => {
     console.log("REFRESHING ACHIEVEMENTS");
-    setAllAchievements((old) => []);
-    setAllAchievements((old) => achievements);
+    setAllAchievements((old) => achievements.map((ach) => ach));
   };
 
   return (

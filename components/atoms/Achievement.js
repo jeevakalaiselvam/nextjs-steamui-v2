@@ -113,6 +113,7 @@ const DescriptionContainer = styled.div`
   width: 100%;
   padding: 0 8px 8px 8px;
   color: #e0e0e0;
+  font-weight: 400;
   z-index: 100;
   align-items: center;
   justify-content: center;
@@ -146,7 +147,7 @@ const PercentageIcon = styled.div`
   flex-direction: column;
   z-index: 100;
   font-size: 2rem;
-  color: #fefefe;
+  color: #737c9d;
   justify-content: center;
 `;
 
@@ -156,7 +157,7 @@ const PercentageData = styled.div`
   flex-direction: column;
   z-index: 100;
   font-size: 1.2rem;
-  color: #fefefe;
+  color: #737c9d;
   justify-content: center;
 `;
 
@@ -179,7 +180,7 @@ const XPIcon = styled.div`
   flex-direction: column;
   z-index: 100;
   font-size: 2rem;
-  color: #fefefe;
+  color: #f1b51b;
   justify-content: center;
 `;
 
@@ -188,7 +189,7 @@ const XPData = styled.div`
   align-items: center;
   flex-direction: column;
   z-index: 100;
-  color: #fefefe;
+  color: #f1b51b;
   font-size: 1.2rem;
   justify-content: center;
 `;
@@ -240,10 +241,10 @@ export default function Achievement(props) {
         <PercentageData>{Math.floor(percent)} %</PercentageData>
       </PercentageContainer>
       <XPContainer>
-        <PercentageIcon>
+        <XPIcon>
           <FaTrophy />
-        </PercentageIcon>
-        <PercentageData>{calculateXPFromPercentage(percent)} XP</PercentageData>
+        </XPIcon>
+        <XPData>{calculateXPFromPercentage(percent)} XP</XPData>
       </XPContainer>
     </Container>
   );
