@@ -120,8 +120,10 @@ export default function Planner({ achievements, gameId, gameName }) {
         <Kanban
           achievements={getRecentlyUnlocked(allAchievements)}
           refreshAchievementList={refreshAchievementList}
-          title={"PHASE6"}
-          phase={5}
+          title={"RECENTLY UNLOCKED"}
+          toggleHardCode={true}
+          phase={6}
+          hidePhase={false}
           gameId={gameId}
           gameName={gameName}
         />

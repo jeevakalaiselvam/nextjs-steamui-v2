@@ -122,7 +122,7 @@ const DescriptionContainer = styled.div`
 `;
 
 const PhaseContainer = styled.div`
-  display: flex;
+  display: ${(props) => (props.hidePhase ? "none" : "flex")};
   width: 80%;
   align-items: center;
   flex-direction: column;
@@ -210,7 +210,7 @@ export default function Achievement(props) {
     unlocktime,
     displayName,
   } = props.achievement;
-  const { phase, gameId, refreshAchievementList, gameName } = props;
+  const { phase, gameId, refreshAchievementList, gameName, hidePhase } = props;
 
   return (
     <Container>
@@ -237,7 +237,7 @@ export default function Achievement(props) {
           </DescriptionContainer>
         </DataContainer>
       </MainContainer>
-      <PhaseContainer>
+      <PhaseContainer hidePhase={hidePhase}>
         <PhaseIcons
           active={phase}
           gameId={gameId}

@@ -51,7 +51,7 @@ const InnerOverlayImage = styled.div`
   background: url(${(props) => props.imageURL});
   background-size: cover;
   background-repeat: no-repeat;
-  filter: blur(20px);
+  filter: blur(30px);
 `;
 
 const TopBarContainer = styled.div`

@@ -104,6 +104,9 @@ export const formatAchievements = (
 export const getPhaseFilteredAchievements = (gameId, achievements, phase) => {
   let newAchievements = [];
   if (achievements.length > 0) {
+    newAchievements = achievements.filter(
+      (achievement) => achievement.achieved == 0
+    );
     newAchievements = achievements.filter((achievement) => {
       if (typeof window !== "undefined") {
         if (
@@ -123,6 +126,7 @@ export const getRecentlyUnlocked = (achievements) => {
   let unlockedAchievements = achievements.filter(
     (achievement) => achievement.achieved == 1
   );
+  console.log("ACHIEVEMENTED", unlockedAchievements);
   let recentUnlocked = unlockedAchievements.sort(
     (ach1, ach2) => +ach1.unlocktime < +ach2.unlocktime
   );

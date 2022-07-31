@@ -5,6 +5,7 @@ import Achievement from "../atoms/Achievement";
 import Search from "./Search";
 import * as Loaders from "react-spinners";
 import PhaseTitle from "../atoms/PhaseTitle";
+import PhaseTitleNormal from "../atoms/PhaseTitleHard";
 
 const Container = styled.div`
   display: flex;
@@ -37,6 +38,7 @@ const AchievementContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   padding: 0.5rem;
+  padding-bottom: 10rem;
   flex-direction: column;
 `;
 
@@ -46,6 +48,8 @@ export default function Kanban({
   phase,
   refreshAchievementList,
   gameName,
+  hidePhase,
+  toggleHardCode,
 }) {
   console.log("KANBAN ACHIEVEMENTS ", phase, achievements);
   const router = useRouter();
@@ -74,19 +78,37 @@ export default function Kanban({
   }, []);
 
   useEffect(() => {
-    const newInnerAchievements = newAchievements.filter((achievement) =>
-      achievement.displayName
-        .toLowerCase()
-        .trim()
-        .includes(searchTerm.toLowerCase().trim())
-    );
+    const newInnerAchievements = newAchievements.filter((achievement) => {
+      if (
+        achievement.displayName
+          .toLowerCase()
+          .trim()
+          .includes(searchTerm.toLowerCase().trim()) ||
+        (achievement.description || achievement.hiddenDescription)
+          .toLowerCase()
+          .trim()
+          .includes(searchTerm.toLowerCase().trim())
+      ) {
+        return true;
+      }
+    });
     setSearchAchievements((old) => newInnerAchievements);
   }, [searchTerm]);
 
   return (
     <Container>
       <TopContainer>
-        <PhaseTitle phase={phase} resetIconTitles={resetIconTitles} />
+        {toggleHardCode && (
+          <PhaseTitleNormal
+            phase={phase}
+            resetIconTitles={resetIconTitles}
+            title={title}
+          />
+        )}
+        {!toggleHardCode && (
+          <PhaseTitle phase={phase} resetIconTitles={resetIconTitles} />
+        )}
+
         <Search searchHandler={searchHandler} opacity="0.75" />
       </TopContainer>
       <AchievementContainer>
@@ -99,6 +121,7 @@ export default function Kanban({
                 phase={phase}
                 gameId={gameId}
                 gameName={gameName}
+                hidePhase={hidePhase}
               />
             );
           })}
