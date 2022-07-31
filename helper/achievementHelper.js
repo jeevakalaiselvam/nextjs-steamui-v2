@@ -40,12 +40,12 @@ export const formatAchievements = (
   playerAchievements,
   hiddenAchievements
 ) => {
-  console.log(
+  console.log("ALL TYPE ACHIEVEMENTS", {
     schemaAchievements,
     globalAchievements,
     playerAchievements,
-    hiddenAchievements
-  );
+    hiddenAchievements,
+  });
 
   if (
     schemaAchievements &&
@@ -110,6 +110,7 @@ export const formatAchievements = (
 };
 
 export const getPhaseFilteredAchievements = (gameId, achievements, phase) => {
+  console.log("GOT For PHASE ", phase, " DATA ", achievements);
   let newAchievements = [];
   if (achievements.length > 0) {
     newAchievements = achievements.filter((achievement) => {

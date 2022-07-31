@@ -150,14 +150,27 @@ export default function GamesContent() {
     schemaAchievements,
   } = game;
 
-  const formattedAchievements = formatAchievements(
-    schemaAchievements,
-    globalAchievements,
-    playerAchievements,
-    hiddenAchievements
-  );
+  const [formattedAcheievements, setFormattedAchievements] = useState([]);
 
-  const resetKanbanBoard = () => {};
+  useEffect(() => {
+    const formattedInnerAchievements = formatAchievements(
+      schemaAchievements,
+      globalAchievements,
+      playerAchievements,
+      hiddenAchievements
+    );
+    console.log("FORMATTED ACHIEVEMENTS", formattedInnerAchievements);
+    setFormattedAchievements((old) => formattedInnerAchievements);
+  }, [game]);
+
+  const resetKanbanBoard = () => {
+    formattedAcheievements.forEach((achievement) => {
+      if (typeof window !== "undefined") {
+        localStorage.setItem(`${gameId}_${achievement.name}_PHASE`, 1);
+        setFormattedAchievements((old) => [...old]);
+      }
+    });
+  };
 
   return (
     <Container imageURL={HEADER_IMAGE(gameId)}>
@@ -182,7 +195,7 @@ export default function GamesContent() {
       <PlannerContainer active={viewMode === GAME_VIEWMODE_PLANNER}>
         {loading && <Loaders.HashLoader />}
         {!loading && (
-          <Planner achievements={formattedAchievements} gameId={gameId} />
+          <Planner achievements={formattedAcheievements} gameId={gameId} />
         )}
       </PlannerContainer>
       <JournalContainer active={viewMode === GAME_VIEWMODE_JOURNAL}>

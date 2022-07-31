@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getPhaseFilteredAchievements } from "../../helper/achievementHelper";
 import Kanban from "./Kanban";
@@ -26,11 +26,16 @@ const KanbanContainer = styled.div`
 `;
 
 export default function Planner({ achievements, gameId }) {
-  const [allAchievements, setAllAchievements] = useState(achievements);
+  console.log("PLANNER ACHIEVEMENTS", achievements);
+  const [allAchievements, setAllAchievements] = useState([]);
   const refreshAchievementList = () => {
     console.log("REFRESHING ACHIEVEMENTS");
     setAllAchievements((old) => achievements.map((ach) => ach));
   };
+
+  useEffect(() => {
+    setAllAchievements((old) => achievements);
+  }, []);
 
   return (
     <Container>
