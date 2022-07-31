@@ -5,6 +5,9 @@ export const GAMES_SORT_NAME_DESC = "GAMES_SORT_NAME_DESC";
 export const GAMES_SORT_PINNED = "GAMES_SORT_PINNED";
 export const GAMES_SORT_STARTED = "GAMES_SORT_STARTED";
 
+export const GAME_VIEWMODE_PLANNER = "GAME_VIEWMODE_PLANNER";
+export const GAME_VIEWMODE_JOURNAL = "GAME_VIEWMODE_JOURNAL";
+
 export const GAMES_FILTER_OPTIONS = [
   {
     id: GAMES_SORT_STARTED,
@@ -29,6 +32,17 @@ export const GAMES_FILTER_OPTIONS = [
   {
     id: GAMES_SORT_NAME_DESC,
     title: "Filter by Name [Z to A]",
+  },
+];
+
+export const GAME_VIEWMODE_OPTION = [
+  {
+    id: GAME_VIEWMODE_PLANNER,
+    title: "Show Planner",
+  },
+  {
+    id: GAME_VIEWMODE_JOURNAL,
+    title: "Show Journal",
   },
 ];
 

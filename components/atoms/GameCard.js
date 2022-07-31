@@ -7,6 +7,8 @@ import { getFormattedGame } from "../../helper/utilHelper";
 import { MdIncompleteCircle } from "react-icons/md";
 import { HiClock, HiCollection } from "react-icons/hi";
 import { FaTrophy } from "react-icons/fa";
+import { getAllXPFromAchievements } from "../../helper/achievementHelper";
+import { useRouter } from "next/router";
 
 const Container = styled.div`
   display: ${(props) => (props.visible ? "flex" : "none")};
@@ -52,6 +54,9 @@ const Title = styled.div`
   width: 100%;
   padding: 0.5rem 1rem;
   max-height: 50px;
+  &:hover {
+    color: #3049d1;
+  }
 `;
 
 const CompletionContainer = styled.div`
@@ -91,6 +96,34 @@ const ToGetData = styled.div`
   justify-content: center;
   color: #f1b51b;
   font-size: ${(props) => props.textSize || "1.5rem"};
+`;
+
+const XPContainer = styled.div`
+  position: absolute;
+  top: 0;
+  padding: 1rem;
+  left: 50%;
+  transition: all 0.3s;
+  background-color: rgba(0, 0, 0, 0.85);
+  flex-direction: column;
+  display: ${(props) => (props.showIcons ? "flex" : "none")};
+  transform: translate(-50%, ${(props) => (props.showIcons ? "0%" : "-100%")});
+`;
+
+const XPIcon = styled.div`
+  display: flex;
+  align-items: center;
+  color: #fefefe;
+  font-size: ${(props) => props.iconSize || "2.25rem"};
+  justify-content: center;
+`;
+
+const XPData = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${(props) => props.textSize || "1.25rem"};
+  color: #fefefe;
 `;
 
 const RefreshIconContainer = styled.div`
@@ -145,10 +178,13 @@ const RefreshIcon = styled.div`
 export default function GameCard(props) {
   const { appid, gameName, playerAchievements, total, completed, remaining } =
     props.game;
-  console.log("GAME", props.game);
   const [showIcons, setShowIcons] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [game, setGame] = useState({});
+  const [formattedAchievements, setFormattedAchievements] = useState([]);
+
+  const { totalXP, completedXP, remainingXP } = getAllXPFromAchievements(
+    formattedAchievements
+  );
 
   const startLoading = () => {
     setLoading((old) => true);
@@ -160,12 +196,14 @@ export default function GameCard(props) {
         const gameData = await fetchGame(appid);
         const formattedGame = getFormattedGame(gameData);
         console.log("FORMATTED GAME", formattedGame);
-        setGame((old) => formattedGame);
+        setFormattedAchievements((old) => formattedGame);
         setLoading((old) => false);
       };
       getGame();
     }
   }, [loading]);
+
+  const router = useRouter();
 
   return (
     <Container
@@ -173,7 +211,14 @@ export default function GameCard(props) {
       visible={gameName?.length !== 0 || false}
     >
       <Overlay />
-      <Title visible={gameName?.length !== 0 ?? false}>{gameName}</Title>
+      <Title
+        visible={gameName?.length !== 0 ?? false}
+        onClick={() => {
+          router.push(`/games/${appid}`);
+        }}
+      >
+        {gameName}
+      </Title>
       <ToGetContainer showIcons={showIcons}>
         <ToGetIcon>
           <FaTrophy />
@@ -186,7 +231,13 @@ export default function GameCard(props) {
         <RefreshIcon onClick={startLoading} loading={loading}>
           <HiRefresh />
         </RefreshIcon>
-      </RefreshIconContainer>
+      </RefreshIconContainer>{" "}
+      <XPContainer showIcons={totalXP !== 0}>
+        <XPIcon>
+          <HiCollection />
+        </XPIcon>
+        <XPData>{remainingXP} XP</XPData>
+      </XPContainer>
     </Container>
   );
 }
