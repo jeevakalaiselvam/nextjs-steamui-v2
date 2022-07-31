@@ -195,7 +195,6 @@ export default function GameCard(props) {
       const getGame = async () => {
         const gameData = await fetchGame(appid);
         const formattedGame = getFormattedGame(gameData);
-        console.log("FORMATTED GAME", formattedGame);
         setFormattedAchievements((old) => formattedGame);
         setLoading((old) => false);
       };
