@@ -49,36 +49,7 @@ export default function Kanban({
   const router = useRouter();
   const gameId = router.query.gameId;
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredAchievements, setFilteredAchievements] = useState(
-    achievements || []
-  );
-  const [searchFilteredAchievement, setSearchFilteredAchievement] = useState(
-    achievements || []
-  );
-
-  useEffect(() => {
-    setFilteredAchievements((old) => achievements.map((ach) => ach));
-  }, [achievements]);
-
-  const searchHandler = (searchData) => {
-    setSearchTerm((old) => searchData);
-  };
-
-  useEffect(() => {
-    const newAchievements = filteredAchievements.filter((achievement) => {
-      console.log(achievement);
-      if (
-        achievement.displayName
-          .toLowerCase()
-          .trim()
-          .includes(searchTerm.toLowerCase().trim())
-      ) {
-        return true;
-      }
-    });
-    setSearchFilteredAchievement((old) => newAchievements);
-  }, [searchTerm]);
+  const searchHandler = (searchData) => {};
 
   return (
     <Container>
@@ -87,8 +58,8 @@ export default function Kanban({
         <Search searchHandler={searchHandler} opacity="0.75" />
       </TopContainer>
       <AchievementContainer>
-        {searchFilteredAchievement &&
-          searchFilteredAchievement.map((achievement) => {
+        {achievements &&
+          achievements.map((achievement) => {
             return (
               <Achievement
                 refreshAchievementList={refreshAchievementList}
@@ -98,7 +69,7 @@ export default function Kanban({
               />
             );
           })}
-        {searchFilteredAchievement && searchFilteredAchievement.length == 0 && (
+        {achievements && achievements.length == 0 && (
           <h5 style={{ color: "#fefefe" }}>None</h5>
         )}
       </AchievementContainer>
