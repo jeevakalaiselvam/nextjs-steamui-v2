@@ -206,7 +206,11 @@ export default function GamesContent() {
       <PlannerContainer active={viewMode === GAME_VIEWMODE_PLANNER}>
         {loading && <Loaders.HashLoader />}
         {!loading && (
-          <Planner achievements={formattedAcheievements} gameId={gameId} />
+          <Planner
+            achievements={formattedAcheievements}
+            gameId={gameId}
+            gameName={gameName}
+          />
         )}
       </PlannerContainer>
       <JournalContainer active={viewMode === GAME_VIEWMODE_JOURNAL}>

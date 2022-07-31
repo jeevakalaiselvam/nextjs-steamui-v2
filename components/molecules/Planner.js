@@ -25,7 +25,7 @@ const KanbanContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-export default function Planner({ achievements, gameId }) {
+export default function Planner({ achievements, gameId, gameName }) {
   console.log("PLANNER ACHIEVEMENTS", achievements);
   const [allAchievements, setAllAchievements] = useState([]);
   const refreshAchievementList = () => {
@@ -57,6 +57,7 @@ export default function Planner({ achievements, gameId }) {
           title={"PHASE1"}
           phase={1}
           gameId={gameId}
+          gameName={gameName}
         />
       </KanbanContainer>
       <KanbanContainer>
@@ -70,6 +71,7 @@ export default function Planner({ achievements, gameId }) {
           title={"PHASE2"}
           phase={2}
           gameId={gameId}
+          gameName={gameName}
         />
       </KanbanContainer>
       <KanbanContainer>
@@ -83,6 +85,7 @@ export default function Planner({ achievements, gameId }) {
           title={"PHASE3"}
           phase={3}
           gameId={gameId}
+          gameName={gameName}
         />
       </KanbanContainer>
       <KanbanContainer>
@@ -96,6 +99,7 @@ export default function Planner({ achievements, gameId }) {
           title={"PHASE4"}
           phase={4}
           gameId={gameId}
+          gameName={gameName}
         />
       </KanbanContainer>
       <KanbanContainer>
@@ -109,6 +113,7 @@ export default function Planner({ achievements, gameId }) {
           title={"PHASE5"}
           phase={5}
           gameId={gameId}
+          gameName={gameName}
         />
       </KanbanContainer>
     </Container>

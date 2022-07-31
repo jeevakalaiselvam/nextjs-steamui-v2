@@ -45,6 +45,7 @@ export default function Kanban({
   achievements,
   phase,
   refreshAchievementList,
+  gameName,
 }) {
   const router = useRouter();
   const gameId = router.query.gameId;
@@ -76,6 +77,7 @@ export default function Kanban({
                 achievement={achievement}
                 phase={phase}
                 gameId={gameId}
+                gameName={gameName}
               />
             );
           })}

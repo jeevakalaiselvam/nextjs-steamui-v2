@@ -105,6 +105,9 @@ const TitleContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+  &:hover {
+    color: #ffffff;
+  }
 `;
 
 const DescriptionContainer = styled.div`
@@ -208,7 +211,7 @@ export default function Achievement(props) {
     unlocktime,
     displayName,
   } = props.achievement;
-  const { phase, gameId, refreshAchievementList } = props;
+  const { phase, gameId, refreshAchievementList, gameName } = props;
 
   return (
     <Container>
@@ -220,7 +223,16 @@ export default function Achievement(props) {
       <MainContainer>
         <AchievementIcon iconURL={icon} />
         <DataContainer>
-          <TitleContainer>{displayName}</TitleContainer>
+          <TitleContainer
+            onClick={() => {
+              if (window !== "undefined") {
+                const searchQuery = `${displayName} ${gameName} achievement`;
+                window.open(`https://www.google.com/search?q=${searchQuery}`);
+              }
+            }}
+          >
+            {displayName}
+          </TitleContainer>
           <DescriptionContainer>
             {description || hiddenDescription}
           </DescriptionContainer>
