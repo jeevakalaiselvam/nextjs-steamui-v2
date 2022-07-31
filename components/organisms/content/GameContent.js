@@ -60,7 +60,6 @@ const TopBarContainer = styled.div`
   padding: 1rem;
   flex-wrap: wrap;
   z-index: 100;
-  opacity: 0.5;
   min-height: 5vh;
   max-height: 5vh;
   justify-content: center;
@@ -76,6 +75,7 @@ const ViewModeContainer = styled.div`
 const FilterContainer = styled.div`
   display: flex;
   flex: 1;
+  opacity: 0.5;
   align-items: center;
   justify-content: flex-start;
 `;

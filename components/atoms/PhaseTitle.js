@@ -31,26 +31,29 @@ const InputContainer = styled.div`
 `;
 
 export default function PhaseTitle(props) {
-  const { phase } = props;
+  const { phase, resetIconTitles } = props;
 
   const [title, setTitle] = useState(``);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const titleInStorage =
-        localStorage.getItem(`PHASE_${phase}_TITLE`) || `PHASE ${phase}`;
+        localStorage.getItem(`PHASE_${phase}_TITLE`).toUpperCase() ||
+        `PHASE ${phase}`.toUpperCase();
 
-      setTitle((old) => titleInStorage);
+      setTitle((old) => titleInStorage.toUpperCase());
     }
   }, [phase]);
 
   const [showTitle, setShowTitle] = useState(true);
   const [showInput, setShowInput] = useState(false);
 
-  const [editTitle, setEditTitle] = useState(title || `PHASE ${phase}`);
+  const [editTitle, setEditTitle] = useState(
+    title.toUpperCase() || `PHASE ${phase}`
+  );
 
   useEffect(() => {
-    setEditTitle((old) => title);
+    setEditTitle((old) => title.toUpperCase());
   }, [title]);
 
   return (
@@ -79,6 +82,7 @@ export default function PhaseTitle(props) {
                   setEditTitle((old) => value);
                   setShowInput((old) => false);
                   setShowTitle((old) => true);
+                  resetIconTitles();
                 }
               });
             }

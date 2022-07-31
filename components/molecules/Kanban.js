@@ -51,15 +51,25 @@ export default function Kanban({
 
   const searchHandler = (searchData) => {};
 
+  const [newAchievements, setNewAchievements] = useState([]);
+  const resetIconTitles = () => {
+    console.log("CHANGING TITLES");
+    setNewAchievements((old) => [...old]);
+  };
+
+  useEffect(() => {
+    setNewAchievements((old) => achievements);
+  }, [achievements]);
+
   return (
     <Container>
       <TopContainer>
-        <PhaseTitle phase={phase} />
+        <PhaseTitle phase={phase} resetIconTitles={resetIconTitles} />
         <Search searchHandler={searchHandler} opacity="0.75" />
       </TopContainer>
       <AchievementContainer>
-        {achievements &&
-          achievements.map((achievement) => {
+        {newAchievements &&
+          newAchievements.map((achievement) => {
             return (
               <Achievement
                 refreshAchievementList={refreshAchievementList}
@@ -69,7 +79,7 @@ export default function Kanban({
               />
             );
           })}
-        {achievements && achievements.length == 0 && (
+        {newAchievements && newAchievements.length == 0 && (
           <h5 style={{ color: "#fefefe" }}>None</h5>
         )}
       </AchievementContainer>

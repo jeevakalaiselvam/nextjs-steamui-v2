@@ -34,7 +34,14 @@ export default function Planner({ achievements, gameId }) {
   };
 
   useEffect(() => {
-    setAllAchievements((old) => achievements);
+    setAllAchievements((old) =>
+      achievements
+        .filter((achievement) => achievement.achieved != 1)
+        .sort(
+          (achievement1, achievement2) =>
+            +achievement1.percentage > +achievement2.percentage
+        )
+    );
   }, [achievements]);
 
   return (

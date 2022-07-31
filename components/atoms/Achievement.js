@@ -121,7 +121,7 @@ const DescriptionContainer = styled.div`
 
 const PhaseContainer = styled.div`
   display: flex;
-  width: 40%;
+  width: 70%;
   align-items: center;
   flex-direction: column;
   justify-content: center;
