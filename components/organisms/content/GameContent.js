@@ -13,11 +13,13 @@ import {
 } from "../../../helper/filterHelper";
 import { useRouter } from "next/router";
 import { formatAchievements } from "../../../helper/achievementHelper";
+import Planner from "../../molecules/Planner";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
   justify-content: flex-start;
   min-height: 100vh;
   max-height: 100vh;
@@ -29,6 +31,8 @@ const TopBarContainer = styled.div`
   align-items: center;
   padding: 1rem;
   flex-wrap: wrap;
+  min-height: 5vh;
+  max-height: 5vh;
   justify-content: center;
 `;
 
@@ -44,9 +48,21 @@ const PlannerContainer = styled.div`
   flex: 1;
   align-items: flex-start;
   padding: 1rem;
+  min-height: 95vh;
+  max-height: 95vh;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: center;
+`;
+
+const PlannerInnerContainer = styled.div`
+  display: "flex";
+  flex: 1;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  overflow: scroll;
 `;
 
 const JournalContainer = styled.div`
@@ -56,7 +72,6 @@ const JournalContainer = styled.div`
   padding: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  overflow: scroll;
 `;
 
 export default function GamesContent() {
@@ -93,7 +108,6 @@ export default function GamesContent() {
     playerAchievements,
     hiddenAchievements
   );
-  console.log("FORMATTED ACHIEVEMENTS", formattedAchievements);
 
   return (
     <Container>
@@ -109,7 +123,7 @@ export default function GamesContent() {
       </TopBarContainer>
       <PlannerContainer active={viewMode === GAME_VIEWMODE_PLANNER}>
         {loading && <Loaders.HashLoader />}
-        {!loading && <h1>Planner</h1>}
+        {!loading && <Planner achievements={formattedAchievements} />}
       </PlannerContainer>
       <JournalContainer active={viewMode === GAME_VIEWMODE_JOURNAL}>
         {loading && <Loaders.HashLoader />}

@@ -72,7 +72,10 @@ export default function GamesContent() {
 
   useEffect(() => {
     const newFilteredGames = games.filter((game) => {
-      return game.gameName.toLowerCase().trim().includes(searchTerm);
+      return game.gameName
+        .toLowerCase()
+        .trim()
+        .includes(searchTerm.toLowerCase().trim());
     });
     setSearchFilteredGames((old) => newFilteredGames);
   }, [searchTerm]);

@@ -57,7 +57,6 @@ export const formatAchievements = (
     hiddenAchievements &&
     hiddenAchievements.length > 0
   ) {
-    console.log("ALL GOT");
     let formattedAchievementsArray = [];
     let formattedAchievements = {};
 
@@ -82,7 +81,6 @@ export const formatAchievements = (
         (key) => formattedAchievements[key]
       );
 
-      console.log("CHECKING", formattedAchievementsArray, hiddenAchievements);
       formattedAchievementsArray = formattedAchievementsArray.map(
         (oldAchievement) => {
           let newAchievement = { ...oldAchievement };
@@ -109,4 +107,19 @@ export const formatAchievements = (
   } else {
     return [];
   }
+};
+
+export const getPhaseFilteredAchievements = (achievements, phase) => {
+  let newAchievements = [];
+  newAchievements = achievements.filter((achievement) => {
+    if (typeof window !== "undefined") {
+      if (
+        JSON.parse(localStorage.getItem(`${achievement.name}_PHASE`)) ||
+        "PHASE1" == phase
+      ) {
+        return achievement;
+      }
+    }
+  });
+  return newAchievements;
 };

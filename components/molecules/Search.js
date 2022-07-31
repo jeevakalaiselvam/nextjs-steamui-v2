@@ -13,7 +13,7 @@ const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: #171717;
-  padding: 0.79rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 8px 0px 0px 8px;
 `;
 
@@ -25,7 +25,7 @@ const InputContainer = styled.div`
   & input {
     outline: none;
     padding: 0.5rem;
-    width: ${(props) => props.width || "150px"};
+    width: ${(props) => props.width || "100%"};
     background: #171717;
     color: #9caabe;
     border: none;
