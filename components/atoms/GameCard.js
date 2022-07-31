@@ -9,6 +9,7 @@ import { HiClock, HiCollection } from "react-icons/hi";
 import { FaTrophy } from "react-icons/fa";
 import { getAllXPFromAchievements } from "../../helper/achievementHelper";
 import { useRouter } from "next/router";
+import { LS_GAME_SELECTED } from "../../helper/storageHelper";
 
 const Container = styled.div`
   display: ${(props) => (props.visible ? "flex" : "none")};
@@ -213,6 +214,9 @@ export default function GameCard(props) {
       <Title
         visible={gameName?.length !== 0 ?? false}
         onClick={() => {
+          if (typeof window !== "undefined") {
+            localStorage.setItem(LS_GAME_SELECTED, appid);
+          }
           router.push(`/games/${appid}`);
         }}
       >

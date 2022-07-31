@@ -1,0 +1,1 @@
+export const LS_GAME_SELECTED = "LS_GAME_SELECTED";

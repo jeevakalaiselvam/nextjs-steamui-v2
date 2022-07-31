@@ -9,6 +9,7 @@ import {
   HiChartBar,
 } from "react-icons/hi";
 import { useRouter } from "next/router";
+import { LS_GAME_SELECTED } from "../../../helper/storageHelper";
 
 const Container = styled.div`
   display: flex;
@@ -27,6 +28,18 @@ export default function GamesMenu() {
         icon={<HiViewGrid />}
         onClick={() => {
           router.push("/");
+        }}
+      />
+      <MenuItem
+        title="Ongoing"
+        icon={<HiViewGrid />}
+        onClick={() => {
+          let toRouter = "";
+          if (typeof window !== "undefined") {
+            toRouter =
+              `/games/${localStorage.getItem(LS_GAME_SELECTED)}` || "/";
+          }
+          router.push(toRouter);
         }}
       />
     </Container>
