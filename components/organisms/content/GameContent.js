@@ -70,7 +70,34 @@ const ViewModeContainer = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
+  justify-content: center;
+`;
+
+const FilterContainer = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
   justify-content: flex-start;
+`;
+
+const ResetContainer = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const ResetButton = styled.div`
+  display: flex;
+  padding: 0 1rem 0 1rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #3049d1;
+  color: #fefefe;
+  cursor: pointer;
+  &:hover {
+    background-color: #1e33a6;
+  }
 `;
 
 const PlannerContainer = styled.div`
@@ -130,6 +157,8 @@ export default function GamesContent() {
     hiddenAchievements
   );
 
+  const resetKanbanBoard = () => {};
+
   return (
     <Container imageURL={HEADER_IMAGE(gameId)}>
       <OverlayImage>
@@ -137,12 +166,17 @@ export default function GamesContent() {
       </OverlayImage>
       <TopBarContainer>
         <ViewModeContainer>
-          <Filter
-            filterOptionChanged={(viewOption) => {
-              setViewMode((old) => viewOption);
-            }}
-            filterOptions={GAME_VIEWMODE_OPTION}
-          />
+          <FilterContainer>
+            <Filter
+              filterOptionChanged={(viewOption) => {
+                setViewMode((old) => viewOption);
+              }}
+              filterOptions={GAME_VIEWMODE_OPTION}
+            />
+          </FilterContainer>
+          <ResetContainer>
+            <ResetButton onClick={resetKanbanBoard}>RESET BOARD</ResetButton>
+          </ResetContainer>
         </ViewModeContainer>
       </TopBarContainer>
       <PlannerContainer active={viewMode === GAME_VIEWMODE_PLANNER}>
