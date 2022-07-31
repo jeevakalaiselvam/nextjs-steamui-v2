@@ -40,7 +40,7 @@ const Overlay = styled.div`
 `;
 
 const Title = styled.div`
-  display: flex;
+  display: ${(props) => (props.visible ? "flex" : "none")};
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -56,6 +56,7 @@ const Title = styled.div`
 
 const CompletionContainer = styled.div`
   position: absolute;
+  display: ${(props) => (props.visible ? "flex" : "none")};
   top: 0;
   padding: 1rem;
   left: 0;
@@ -66,6 +67,8 @@ const CompletionContainer = styled.div`
 
 const ToGetContainer = styled.div`
   position: absolute;
+  display: "flex";
+  flex-direction: column;
   top: 0;
   left: 0;
   padding: 1rem;
@@ -90,7 +93,7 @@ const ToGetData = styled.div`
   font-size: ${(props) => props.textSize || "1rem"};
 `;
 
-const RefreshIcon = styled.div`
+const RefreshIconContainer = styled.div`
   position: absolute;
   top: 0px;
   right: 0;
@@ -100,15 +103,22 @@ const RefreshIcon = styled.div`
   align-items: center;
   justify-content: center;
   transition: spin 0.5s;
-  background-color: ${(props) =>
-    props.loading ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 0.85)"};
+  background-color: rgba(0, 0, 0, 0.85);
+`;
+
+const RefreshIcon = styled.div`
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: spin 0.5s;
   -webkit-animation: ${(props) =>
     props.loading ? "spin 1s linear infinite" : "none"};
   -moz-animation: ${(props) =>
     props.loading ? "spin 1s linear infinite" : "none"};
   animation: ${(props) => (props.loading ? "spin 1s linear infinite" : "none")};
 
-  color: ${(props) => (props.loading ? "#fefefe" : "auto")};
+  color: ${(props) => (props.loading ? "green" : "auto")};
 
   &:hover {
     color: #fefefe;
@@ -161,17 +171,25 @@ export default function GameCard(props) {
   }, [loading]);
 
   return (
-    <Container image={HEADER_IMAGE(appid)} visible={gameName.length !== 0}>
-      <Overlay /> <Title>{gameName}</Title>
+    <Container
+      image={HEADER_IMAGE(appid)}
+      visible={gameName?.length !== 0 || false}
+    >
+      <Overlay />
+      <Title visible={gameName?.length !== 0 ?? false}>{gameName}</Title>
       <ToGetContainer showIcons={showIcons}>
         <ToGetIcon>
           <FaTrophy />
         </ToGetIcon>
-        <ToGetData>{playerAchievements?.length || 0 - completed}</ToGetData>
+        <ToGetData visible={playerAchievements?.length || false}>
+          {playerAchievements?.length || 0 - completed}
+        </ToGetData>
       </ToGetContainer>
-      <RefreshIcon onClick={startLoading} loading={loading}>
-        <HiRefresh />
-      </RefreshIcon>
+      <RefreshIconContainer>
+        <RefreshIcon onClick={startLoading} loading={loading}>
+          <HiRefresh />
+        </RefreshIcon>
+      </RefreshIconContainer>
     </Container>
   );
 }

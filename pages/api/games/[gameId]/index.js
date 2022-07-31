@@ -23,6 +23,8 @@ const handler = async (req, res) => {
       let titles = [];
       let descriptions = [];
 
+      const gameName = $(".dropdown-toggle")["title"];
+
       $("span.title").each(function (i, e) {
         titles[i] = $(this).text().trim();
       });
@@ -35,6 +37,7 @@ const handler = async (req, res) => {
         hiddenAchievements.push({
           name: titles[i],
           description: descriptions[i],
+          gameName: gameName,
         });
       });
 
