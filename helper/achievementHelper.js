@@ -1,3 +1,10 @@
+import {
+  TYPE_EVERY,
+  TYPE_MONTH,
+  TYPE_TODAY,
+  TYPE_WEEK,
+} from "./constantHelper";
+
 export const XP_FOR_LEVEL = 1000;
 
 export const calculateXPFromPercentage = (percentage) => {
@@ -131,4 +138,58 @@ export const getRecentlyUnlocked = (achievements) => {
     (ach1, ach2) => +ach1.unlocktime < +ach2.unlocktime
   );
   return recentUnlocked;
+};
+
+export const getRecentlyUnlockedToday = (achievements, type) => {
+  let recentUnlocked = [];
+  let unlockedAchievements = [];
+  let date = new Date();
+  let timeUTC;
+
+  unlockedAchievements = achievements.filter(
+    (achievement) => achievement.achieved == 1
+  );
+  unlockedAchievements = unlockedAchievements.sort(
+    (ach1, ach2) => +ach1.unlocktime < +ach2.unlocktime
+  );
+
+  switch (type) {
+    case TYPE_TODAY:
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate());
+      timeUTC = date.getTime() / 1000;
+
+      unlockedAchievements = unlockedAchievements.filter(
+        (achievement) => +achievement.unlocktime > timeUTC
+      );
+      break;
+    case TYPE_WEEK:
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() - 7);
+      timeUTC = date.getTime() / 1000;
+      unlockedAchievements = unlockedAchievements.filter(
+        (achievement) => +achievement.unlocktime > timeUTC
+      );
+      break;
+    case TYPE_MONTH:
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() - 30);
+      timeUTC = date.getTime() / 1000;
+      unlockedAchievements = unlockedAchievements.filter(
+        (achievement) => +achievement.unlocktime > timeUTC
+      );
+      break;
+    case TYPE_EVERY:
+      unlockedAchievements = unlockedAchievements;
+      break;
+    default:
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate());
+      timeUTC = date.getTime() / 1000;
+      unlockedAchievements = unlockedAchievements.filter(
+        (achievement) => +achievement.unlocktime > timeUTC
+      );
+  }
+
+  return unlockedAchievements;
 };

@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import {
+  TYPE_EVERY,
+  TYPE_MONTH,
+  TYPE_TODAY,
+  TYPE_WEEK,
+} from "../../helper/constantHelper";
 
 const Container = styled.div`
   display: flex;
@@ -7,6 +13,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-bottom: 1rem;
+  cursor: pointer;
 `;
 
 const TitleContainer = styled.div`
@@ -31,10 +38,23 @@ const InputContainer = styled.div`
 `;
 
 export default function PhaseTitleNormal(props) {
-  const { phase, resetIconTitles, title } = props;
+  const { phase, resetIconTitles, title, changeRecentlyUnlockedType } = props;
+
+  const options = [
+    { type: TYPE_TODAY, title: "Today" },
+    { type: TYPE_WEEK, title: "Today" },
+    { type: TYPE_MONTH, title: "Today" },
+    { type: TYPE_EVERY, title: "Today" },
+  ];
+
+  const [currentActive, setCurrentActive] = useState;
 
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        changeRecentlyUnlockedType(TYPE_WEEK);
+      }}
+    >
       <TitleContainer show={true}>{title.toUpperCase()}</TitleContainer>
     </Container>
   );

@@ -50,6 +50,7 @@ export default function Kanban({
   gameName,
   hidePhase,
   toggleHardCode,
+  changeRecentlyUnlockedType,
 }) {
   console.log("KANBAN ACHIEVEMENTS ", phase, achievements);
   const router = useRouter();
@@ -103,6 +104,7 @@ export default function Kanban({
             phase={phase}
             resetIconTitles={resetIconTitles}
             title={title}
+            changeRecentlyUnlockedType={changeRecentlyUnlockedType}
           />
         )}
         {!toggleHardCode && (

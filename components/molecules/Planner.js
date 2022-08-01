@@ -3,7 +3,14 @@ import styled from "styled-components";
 import {
   getPhaseFilteredAchievements,
   getRecentlyUnlocked,
+  getRecentlyUnlockedToday,
 } from "../../helper/achievementHelper";
+import {
+  TYPE_EVERY,
+  TYPE_MONTH,
+  TYPE_TODAY,
+  TYPE_WEEK,
+} from "../../helper/constantHelper";
 import Kanban from "./Kanban";
 
 const Container = styled.div`
@@ -43,6 +50,39 @@ export default function Planner({ achievements, gameId, gameName }) {
   useEffect(() => {
     setAllAchievements((old) => achievements);
   }, []);
+
+  const [recentUnlocked, setRecentlyUnlocked] = useState([]);
+
+  useEffect(() => {
+    const recently = getRecentlyUnlockedToday(allAchievements);
+    setRecentlyUnlocked((old) => recently);
+  }, [allAchievements]);
+
+  const changeRecentlyUnlockedType = (type) => {
+    console.log("CHANGING RECENT");
+    const recently = [];
+    switch (type) {
+      case TYPE_TODAY:
+        recently = getRecentlyUnlockedToday(allAchievements, type);
+        setRecentlyUnlocked((old) => recently);
+        break;
+      case TYPE_WEEK:
+        recently = getRecentlyUnlockedToday(allAchievements, type);
+        setRecentlyUnlocked((old) => recently);
+        break;
+      case TYPE_MONTH:
+        recently = getRecentlyUnlockedToday(allAchievements, type);
+        setRecentlyUnlocked((old) => recently);
+        break;
+      case TYPE_EVERY:
+        recently = getRecentlyUnlockedToday(allAchievements, type);
+        setRecentlyUnlocked((old) => recently);
+        break;
+      default:
+        recently = getRecentlyUnlockedToday(allAchievements, type);
+        setRecentlyUnlocked((old) => recently);
+    }
+  };
 
   return (
     <Container>
@@ -118,7 +158,7 @@ export default function Planner({ achievements, gameId, gameName }) {
       </KanbanContainer>
       <KanbanContainer>
         <Kanban
-          achievements={getRecentlyUnlocked(allAchievements)}
+          achievements={recentUnlocked}
           refreshAchievementList={refreshAchievementList}
           title={"RECENTLY UNLOCKED"}
           toggleHardCode={true}
@@ -126,6 +166,7 @@ export default function Planner({ achievements, gameId, gameName }) {
           hidePhase={false}
           gameId={gameId}
           gameName={gameName}
+          changeRecentlyUnlockedType={changeRecentlyUnlockedType}
         />
       </KanbanContainer>
     </Container>
