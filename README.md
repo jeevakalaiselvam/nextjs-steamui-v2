@@ -3,4 +3,4 @@
 # Screenshots
 
 ![Screenshot](screens/img1.png)
-![Screenshot](screens/img1.png)
+![Screenshot](screens/img2.png)
