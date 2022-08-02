@@ -47,8 +47,6 @@ export default function PhaseTitleNormal(props) {
     { type: TYPE_EVERY, title: "Today" },
   ];
 
-  const [currentActive, setCurrentActive] = useState;
-
   return (
     <Container
       onClick={() => {
